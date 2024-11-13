@@ -1,12 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>타이틀</title>
-</head>
-<body>
-<h1> 제목</h1>
-<p> 텍스트 </p>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- google  Icon-->
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+      <title>Hello, modularity!</title>
+      <style>
+          .profile {
+              width: 150px;
+              height: 150px;
+              border-radius: 70%;
+              overflow: hidden;
+          }
+      </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width: 100%">
+      <div class="container-fluid" style="justify-content: space-between; flex-wrap: nowrap; min-width: 1000px">
+        <a class="navbar-brand" href="#"><img src="https://cdn.apple-economy.com/news/photo/201701/31523_16465_3732.png" style="width:90px"></a>
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 400px">
+          <div>
+          <span class="material-symbols-outlined">home</span>
+          <span class="material-symbols-outlined">send</span>
+          <span class="material-symbols-outlined">add_box</span>
+          <span class="material-symbols-outlined">explore</span>
+          <span class="material-symbols-outlined">favorite</span>
+              </div>
+       </div>
+    </nav>
 
-</body>
+    <div style="display: flex; flex-direction: row; text-align: center; justify-content: center; padding-top: 60px; background-color: ghostwhite">
+        <div style="width: 600px; height: 1000px; margin-right: 256px">
+            <div style="border: solid 1px gray; background-color: white">
+                <div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2texQegHUj0rcJmaocJ90rpDCMSlGW8jbJg&s" class="profile">
+                </div>
+                <div> 이미지 </div>
+                <div> 아이콘 집합 </div>
+                <div> 댓글 </div>
+                <div> 댓글입력창 </div>
+            </div>
+        </div>
+        <div style="width: 400px; height: 1000px; background: cornsilk; position: fixed; left: 62%">
+            오른쪽
+        </div>
+    </div>
+
+
+    <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "@popperjs/core": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/esm/popper.min.js",
+        "bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.esm.min.js"
+      }
+    }
+    </script>
+    <script type="module">
+      import * as bootstrap from 'bootstrap'
+
+      new bootstrap.Popover(document.getElementById('popoverButton'))
+    </script>
+  </body>
 </html>
