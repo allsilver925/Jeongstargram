@@ -33,16 +33,19 @@
 
     <div style="display: flex; flex-direction: row; text-align: center; justify-content: center; padding-top: 60px; background-color: ghostwhite">
         <div style="min-width: 600px; height: 1000px; margin-right: 300px">
+
+            <!-- 여기부터 피드박스 -->
+           {%  for feed in feeds %}
             <div style="border: solid 1px gray; background-color: white; margin:20px 20px; ">
                     <div style="display: flex; flex-direction: row; align-items: center; ">
                         <div class="box" style="width: 60px; height: 60px">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2texQegHUj0rcJmaocJ90rpDCMSlGW8jbJg&s" class="profile">
+                        <img src="{{ feed.profile_image }}" class="profile">
                     </div>
                         <div>
-                            allsilver
+                            {{ feed.user_id}}
                         </div>
                     </div>
-                <div> <img style="width: 100%" src="https://media.eoding.com/media/travelagent/420/imagecontent/1905_%EC%9C%A0%EB%9F%BD%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%AC%ED%96%89_%EC%8A%A4%ED%8E%98%EC%9D%B8%EC%97%AC%ED%96%89_%EC%9D%B4%EB%B2%A4%ED%8A%B8_34.jpg?w=600&h=600&q=90&f=cover"> </div>
+                <div> <img style="width: 100%" src="{{feed.image}}"> </div>
                 <div style="margin:0 20px; display: flex; flex-direction: row; justify-content: space-between">
                     <div >
                         <span class="material-symbols-outlined">favorite</span>
@@ -53,70 +56,16 @@
                         <span class="material-symbols-outlined">bookmark</span>
                     </div>
                 </div>
-              <div style="margin-left: 20px;text-align: left; font-size: 15px"> 정다은<b>외 19명</b>이 좋아합니다. </div>
-                <div style="margin-left: 20px;text-align: left; font-size: 15px"><b>allsilver</b> 2025년 스페인에서... </div>
+              <div style="margin-left: 20px;text-align: left; font-size: 15px"> 정다은<b>외 {{ feed.like_count }}명</b>이 좋아합니다. </div>
+                <div style="margin-left: 20px;text-align: left; font-size: 15px"><b>{{ feed.user_id }}</b> {{ feed.content }} </div>
                 <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>jeongbw</b> 너무 좋네 스페인</div>
                 <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>kimhg63</b> 날씨 짱이네</div>
                 <div>
                     <input type="text" class="form-control" placeholder="댓글 달기.." style="box-shadow: none; border: none" >
                 </div>
             </div>
-            <div style="border: solid 1px gray; background-color: white; margin:20px 20px; ">
-                    <div style="display: flex; flex-direction: row; align-items: center; ">
-                        <div class="box" style="width: 60px; height: 60px">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2texQegHUj0rcJmaocJ90rpDCMSlGW8jbJg&s" class="profile">
-                    </div>
-                        <div>
-                            allsilver
-                        </div>
-                    </div>
-                <div> <img style="width: 100%" src="https://media.eoding.com/media/travelagent/420/imagecontent/1905_%EC%9C%A0%EB%9F%BD%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%AC%ED%96%89_%EC%8A%A4%ED%8E%98%EC%9D%B8%EC%97%AC%ED%96%89_%EC%9D%B4%EB%B2%A4%ED%8A%B8_34.jpg?w=600&h=600&q=90&f=cover"> </div>
-                <div style="margin:0 20px; display: flex; flex-direction: row; justify-content: space-between">
-                    <div >
-                        <span class="material-symbols-outlined">favorite</span>
-                        <span class="material-symbols-outlined">chat_bubble</span>
-                        <span class="material-symbols-outlined">send</span>
-                    </div>
-                    <div>
-                        <span class="material-symbols-outlined">bookmark</span>
-                    </div>
-                </div>
-              <div style="margin-left: 20px;text-align: left; font-size: 15px"> 정다은<b>외 19명</b>이 좋아합니다. </div>
-                <div style="margin-left: 20px;text-align: left; font-size: 15px"><b>allsilver</b> 2025년 스페인에서... </div>
-                <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>jeongbw</b> 너무 좋네 스페인</div>
-                <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>kimhg63</b> 날씨 짱이네</div>
-                <div>
-                    <input type="text" class="form-control" placeholder="댓글 달기.." style="box-shadow: none; border: none" >
-                </div>
-            </div>
-            <div style="border: solid 1px gray; background-color: white; margin:20px 20px; ">
-                    <div style="display: flex; flex-direction: row; align-items: center; ">
-                        <div class="box" style="width: 60px; height: 60px">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2texQegHUj0rcJmaocJ90rpDCMSlGW8jbJg&s" class="profile">
-                    </div>
-                        <div>
-                            allsilver
-                        </div>
-                    </div>
-                <div> <img style="width: 100%" src="https://media.eoding.com/media/travelagent/420/imagecontent/1905_%EC%9C%A0%EB%9F%BD%ED%8C%A8%ED%82%A4%EC%A7%80%EC%97%AC%ED%96%89_%EC%8A%A4%ED%8E%98%EC%9D%B8%EC%97%AC%ED%96%89_%EC%9D%B4%EB%B2%A4%ED%8A%B8_34.jpg?w=600&h=600&q=90&f=cover"> </div>
-                <div style="margin:0 20px; display: flex; flex-direction: row; justify-content: space-between">
-                    <div >
-                        <span class="material-symbols-outlined">favorite</span>
-                        <span class="material-symbols-outlined">chat_bubble</span>
-                        <span class="material-symbols-outlined">send</span>
-                    </div>
-                    <div>
-                        <span class="material-symbols-outlined">bookmark</span>
-                    </div>
-                </div>
-              <div style="margin-left: 20px;text-align: left; font-size: 15px"> 정다은<b>외 19명</b>이 좋아합니다. </div>
-                <div style="margin-left: 20px;text-align: left; font-size: 15px"><b>allsilver</b> 2025년 스페인에서... </div>
-                <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>jeongbw</b> 너무 좋네 스페인</div>
-                <div style="margin-left: 20px;text-align: left; font-size: 13px"><b>kimhg63</b> 날씨 짱이네</div>
-                <div>
-                    <input type="text" class="form-control" placeholder="댓글 달기.." style="box-shadow: none; border: none" >
-                </div>
-            </div>
+            {% endfor %}
+            <!-- 여기까지 피드박스 -->
         </div>
         <div style="width: 400px; height: 1000px; background: cornsilk; position: fixed; left: 62%">
                 <div style="display: flex; flex-direction: row;  ">

@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import Sub
+from content.views import Main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/',Sub.as_view()) #?
+    path('main/',Main.as_view()) #?
 ]
 
 # 가상환경 실행 : source .venv/scripts/activate
