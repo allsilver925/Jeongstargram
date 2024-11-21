@@ -18,7 +18,7 @@
               border-radius: 70%;
               overflow: hidden;
           }
-               .modal_overlay {
+          .modal_overlay {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -45,7 +45,7 @@
             padding: 10px;
             text-align: center;
         }
-        
+
         .image_upload_space{
         outline: 2px dashed black ;
         outline-offset:-10px;
@@ -54,6 +54,27 @@
         width: 780px;
         height: 550px;
     }
+
+        .modal_text_window {
+            background: white;
+            backdrop-filter: blur(13.5px);
+            -webkit-backdrop-filter: blur(13.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 800px;
+            height: 600px;
+            position: relative;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .iput_text {
+            outline: 2px dashed gray;
+            text-align: left;
+            width: 250px;
+            height: 550px;
+        }
+
       </style>
   </head>
   <body>
@@ -177,12 +198,11 @@
             </div>
         </div>
     </div>
-
-    <div class="modal_overlay">
+    <!-- 이미지삽입 모달 시작-->
+    <div id="first_modal" class="modal_overlay">
         <div class="modal_window">
             <div style="display: flex; flex-direction: row; justify-content: space-between">
                 <div style="width: 40px;">
-
                 </div>
                 <div>
                     새 이미지 업로드
@@ -195,14 +215,35 @@
                 여기에 파일을 넣어주세요
             </div>
         </div>
-
     </div>
+    <!-- 이미지삽입 모달 끝-->
+
+    <!-- 텍스트 모달 시작-->
+    <div id="second_modal" class="modal_overlay">
+        <div class="modal_text_window">
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <div style="width: 40px;">
+                </div>
+                <div>
+                    새 글 입력
+                </div>
+                <div>
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <img src="" id="upload_picture">
+                <input type="text" class="iput_text" size="90" maxlength="100" >
+            </div>
+        </div>
+    </div>
+    <!-- 텍스트 모달 끝-->
 
     <!-- javascript or jQuery -->
     <script>
         // 이미지 업로드 모달 띄우기 이벤트
         $('#navbar_add_box').click(function (){
-            $('.modal_overlay').css({
+            $('#first_modal').css({
                 display :'flex'
             });
             $(document.body).css({
@@ -215,33 +256,64 @@
             .on("dragover", dragOver)   //dragover : 마우스가 창 위에 올라감
             .on("dragleave", dragOver)  //dragleave : 마우스가 창 위에서 사라짐
             .on("drop", uploadFiles);   //drop : 마우스를 드롭
-        
+
         function dragOver(e){
         e.stopPropagation();
         e.preventDefault(); // dragover,dragleave,drop 함수는 자동적으로 새 창에 이미지를 띄우는 함수기 때문에 막아줘야 함
-            
-            //console.log(e);
+
         if (e.type == "dragover") {
-        $(e.target).css({
-            "background-color": "black",
-            "outline-offset": "-20px"
-        });
-        } else {
             $(e.target).css({
-                "background-color": "white",
-                "outline-offset": "-10px"
+                "background-color": "orange",
+                "outline-offset": "-20px"
             });
+            } else {
+                $(e.target).css({
+                    "background-color": "white",
+                    "outline-offset": "-10px"
+                });
             }
         }
-        
-       function uploadFiles(e){
-        e.stopPropagation();
-        e.preventDefault();
-           
+
+       function uploadFiles(e) {
+           e.stopPropagation();
+           e.preventDefault();
+
+           e.dataTransfer = e.originalEvent.dataTransfer;
+           var files = e.dataTransfer.files;
+           console.log("파일 올라왔나?" + files[0].name)
+           if (files.length > 1) {
+               alert('하나만 올려라.');
+               return;
+           }
+
+           if (files[0].type.match(/image.*/)) {
+               $(e.target).css({
+                   "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                   "outline": "none",
+                   "background-size": "100% 100%"
+               });
+                $('#first_modal').css({
+                display: 'none'
+                });
+                $('#second_modal').css({
+                display: 'flex'
+                });
+                $('#upload_picture').css({
+                    "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+                    "outline": "none",
+                    "background-size": "100% 100%"
+                })
+
+           } else {
+               alert('이미지가 아닙니다.');
+               return;
+           }
+
+
        }
-            
+
         </script>
-    
+
     <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
     <script type="importmap">
     {
