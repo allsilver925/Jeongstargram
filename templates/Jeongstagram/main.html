@@ -47,7 +47,6 @@
         }
 
         .image_upload_space{
-        outline: 2px dashed black ;
         outline-offset:-10px;
         text-align: center;
         transition: all .15s ease-in-out;
@@ -69,7 +68,6 @@
         }
 
         .iput_text {
-            outline: 2px dashed gray;
             text-align: left;
             width: 250px;
             height: 550px;
@@ -201,7 +199,7 @@
     <!-- 이미지삽입 모달 시작-->
     <div id="first_modal" class="modal_overlay">
         <div class="modal_window">
-            <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="border-bottom: solid 1px gray; display: flex; flex-direction: row; justify-content: space-between">
                 <div style="width: 40px;">
                 </div>
                 <div>
@@ -221,7 +219,7 @@
     <!-- 텍스트 모달 시작-->
     <div id="second_modal" class="modal_overlay">
         <div class="modal_text_window">
-            <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="border-bottom: solid 1px gray; display: flex; flex-direction: row; justify-content: space-between">
                 <div style="width: 40px;">
                 </div>
                 <div>
@@ -232,8 +230,14 @@
                 </div>
             </div>
             <div style="display: flex; flex-direction: row; justify-content: space-between">
-                <img src="" id="upload_picture">
-                <input type="text" class="iput_text" size="90" maxlength="100" >
+                <div class="image_upload_space" style="width: 500px; height: 540px;">
+                </div>
+                <div style="border-left: solid 1px gray;">
+                    <div>
+                        <textarea class="form-control" id="input_contents" placeholder="글을 입력하세요" rows="5" style="width:280px;height:400px"> </textarea>
+                    </div>
+                    <button style="width: 100%" type="button" class="btn btn-primary" id="feed_create_button">공유하기</button>
+                </div>
             </div>
         </div>
     </div>
@@ -241,6 +245,7 @@
 
     <!-- javascript or jQuery -->
     <script>
+        let files;
         // 이미지 업로드 모달 띄우기 이벤트
         $('#navbar_add_box').click(function (){
             $('#first_modal').css({
@@ -251,6 +256,46 @@
             });
 
         })
+        
+        
+        //피드 공유하기 이벤트
+        $('#feed_create_button').click(function (){
+            alert("공유하는중" + files[0].name + $('#input_contents').val());
+            
+            let file = files;
+            let image = files[0].name;
+            let content = $('#input_contents').val();
+            let user_id = allsilver;
+            let profile_image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2texQegHUj0rcJmaocJ90rpDCMSlGW8jbJg&s";
+            
+            {# AJAX 파일을 같이 넘기는지 or 데이터만 넘기는지에 따라서 형식이 달라짐 #}
+            {# RestFul형태 API는 json형태로 데이터를 주고받음. 파일을 같이 넘길때는 formdata 형태로 주고받음 #}
+            let fd = new FormData();
+            fd.append('file',file);
+            fd.append('image',image);
+            fd.append('content', content);
+            fd.append('user_id', user_id);
+            fd.append('profile_image',profile_image);
+            
+            $.ajax({
+                url:"/content/upload",
+                data: fd,
+                method: "POST",
+                processData: false,
+                contentType: false,
+                {#액션이 일어나고 그 결과로 실행된 함수 : 콜백함수#}
+                success: function (data){
+                    console.log("성공");
+                },
+                error: function (request, status, error){
+                    console.log("에러");
+                },
+                complete: function (){
+                  console.log("완료");
+                }
+            })
+        })
+           
         // 이미지 업로드 모달 창 동작 이벤드
         $('.image_upload_space')
             .on("dragover", dragOver)   //dragover : 마우스가 창 위에 올라감
@@ -279,7 +324,7 @@
            e.preventDefault();
 
            e.dataTransfer = e.originalEvent.dataTransfer;
-           var files = e.dataTransfer.files;
+           files = e.target.files || e.dataTransfer.files;
            console.log("파일 올라왔나?" + files[0].name)
            if (files.length > 1) {
                alert('하나만 올려라.');
@@ -298,19 +343,21 @@
                 $('#second_modal').css({
                 display: 'flex'
                 });
-                $('#upload_picture').css({
+                $('.image_upload_space').css({
                     "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
                     "outline": "none",
-                    "background-size": "100% 100%"
+                    "background-size": "100%",
+                    "background-repeat" : "no-repeat",
+                    "background-position" : "center"
                 })
 
            } else {
                alert('이미지가 아닙니다.');
                return;
            }
-
-
        }
+       
+        
 
         </script>
 
