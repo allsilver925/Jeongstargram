@@ -262,7 +262,7 @@
         $('#feed_create_button').click(function (){
             alert("공유하는중" + files[0].name + $('#input_contents').val());
             
-            let file = files;
+            let file = files[0];
             let image = files[0].name;
             let content = $('#input_contents').val();
             let user_id = "allsilver";
@@ -271,6 +271,7 @@
             {# AJAX 파일을 같이 넘기는지 or 데이터만 넘기는지에 따라서 형식이 달라짐 #}
             {# RestFul형태 API는 json형태로 데이터를 주고받음. 파일을 같이 넘길때는 formdata 형태로 주고받음 #}
             let fd = new FormData();
+            
             fd.append('file',file);
             fd.append('image',image);
             fd.append('content', content);
