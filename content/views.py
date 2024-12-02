@@ -30,7 +30,7 @@ class UploadFeed(APIView):
         uuid_name = uuid4().hex #서버에 올릴때는 이미지의 이름을 uuid함수를 사용하여 고유의 이름값을 줌(한글 등의 경우 오류가 날 수있기 때문)
         save_path = os.path.join(MEDIA_ROOT, uuid_name) # ~/PycharmProjects/Jeongstargram/media + uuid_name
 
-        with open(save_path, 'wb+') as destination: #파일을 읽고 저장할때 사용하는 코드
+        with open(save_path, 'wb+') as destination: #실제로 파일을 읽고 저장할때 사용하는 코드
             for chunk in file.chunks():
                 destination.write(chunk)
 
